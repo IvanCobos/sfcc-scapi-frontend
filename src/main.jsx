@@ -5,7 +5,7 @@ import App from './App'
 import PLP from './pages/PLP'
 import PDP from './pages/PDP'
 import Cart from './pages/Cart'
-import Stores from './pages/stores'
+import Stores from './pages/Stores'
 
 // Importa los estilos de Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
