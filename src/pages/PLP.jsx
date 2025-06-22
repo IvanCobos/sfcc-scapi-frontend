@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 // import Spinner from '../components/Spinner'
-import { PLPPlaceholder } from '../components/ProductPlaceholder'
+import { PLPPlaceholder } from '../components/ProductPlaceHolder'
 
 export default function PLP() {
   const [products, setProducts] = useState([])

@@ -1,7 +1,7 @@
 // pages/PDP.jsx
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { PDPPlaceholder } from '../components/ProductPlaceholder'
+import { PDPPlaceholder } from '../components/ProductPlaceHolder'
 
 export default function PDP() {
   const { id } = useParams()
