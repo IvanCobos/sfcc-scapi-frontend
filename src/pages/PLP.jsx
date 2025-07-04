@@ -18,7 +18,7 @@ export default function PLP() {
     const fetchProducts = async () => {
       setLoading(true)
       try {
-        const res = await fetch(`${baseUrl}/api/product-search?categoryId=${selectedCategory}`)
+        const res = await fetch(`https://sfcc-scapi-frontend.onrender.com/api/product-search?categoryId=${selectedCategory}`)
         const data = await res.json()
         console.log('Productos desde categoría', selectedCategory, data)
         setProducts(data?.hits || [])

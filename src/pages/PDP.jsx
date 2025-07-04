@@ -14,7 +14,7 @@ export default function PDP() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`${baseUrl}/api/product/${id}`)
+        const res = await fetch(`https://sfcc-scapi-frontend.onrender.com/api/product/${id}`)
         const data = await res.json()
         setProduct(data)
       } catch (err) {
