@@ -9,10 +9,12 @@ export default function PDP() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const baseUrl = import.meta.env.VITE_API_BASE_URL
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://conection-scapi.onrender.com/api/product/${id}`)
+        const res = await fetch(`${baseUrl}/api/product/${id}`)
         const data = await res.json()
         setProduct(data)
       } catch (err) {
