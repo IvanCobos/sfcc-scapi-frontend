@@ -4,25 +4,43 @@ import {StoresPlaceholder} from '../components/ProductPlaceHolder'
 export default function Stores() {
   const [stores, setStores] = useState([])
   const [loading, setLoading] = useState(true)
+  const [assortment, setAssortment] = useState([])
 
-  const storeIds = ['01418', '03125']
+  const storeIds = ['00001']
 
   useEffect(() => {
     const fetchStores = async () => {
+      const baseUrl = import.meta.env.VITE_API_BASE_URL
       try {
-        const res = await fetch(`https://conection-scapi.onrender.com/api/stores?ids=${storeIds.join(',')}`)
+        const res = await fetch(`${baseUrl}/api/stores?ids=${storeIds.join(',')}`)
         const data = await res.json()
-        setStores(data.data || [])
-        console.log(data)
+  
+        if (data && data.data) {
+          const storesWithParsedAssortment = data.data.map((store) => {
+            let parsedAssortment = []
+            try {
+              parsedAssortment = JSON.parse(store['c_custom-assortment'])
+            } catch (e) {
+              console.error(`Error parsing assortment for store ${store.name || ''}:`, e)
+            }
+            return {
+              ...store,
+              parsedAssortment // nuevo campo
+            }
+          })
+  
+          setStores(storesWithParsedAssortment)
+        }
       } catch (err) {
         console.error('Error al obtener las tiendas:', err)
       } finally {
         setLoading(false)
       }
     }
-
+  
     fetchStores()
   }, [])
+  
 
   if (loading) {
       return (<StoresPlaceholder/>)
@@ -47,6 +65,17 @@ export default function Stores() {
                   <strong>CP:</strong> {store?.postalCode || 'N/A'}
                 </p>
                 <p className="mb-0">{store.address1}</p>
+                <br></br>
+                <p className="mb-0">
+  <strong>Assortment:</strong>
+  <ul>
+    {store.parsedAssortment?.map((item, idx) => (
+      <li key={idx}>
+        <strong>{item.clusterization}</strong>: {item.cluster}
+      </li>
+    ))}
+  </ul>
+</p>
               </div>
             </div>
           </div>
