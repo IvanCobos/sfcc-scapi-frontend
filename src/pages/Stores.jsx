@@ -12,7 +12,7 @@ export default function Stores() {
     const fetchStores = async () => {
       const baseUrl = import.meta.env.VITE_API_BASE_URL
       try {
-        const res = await fetch(`https://sfcc-scapi-frontend.onrender.com/api/stores?ids=${storeIds.join(',')}`)
+        const res = await fetch(`${baseUrl}/api/stores?ids=${storeIds.join(',')}`)
         const data = await res.json()
   
         if (data && data.data) {
